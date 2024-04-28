@@ -1,5 +1,9 @@
 package com.laissdj.weathermap.response
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class WeatherResponse(
     val coord: Coord,
     val weather: List<Weather>,
@@ -7,7 +11,7 @@ data class WeatherResponse(
     val main: Main,
     val visibility: Int,
     val wind: Wind,
-    val rain: Rain?,
+    val rain: Rain? = null,
     val clouds: Clouds,
     val dt: Long,
     val sys: Sys,
@@ -17,11 +21,13 @@ data class WeatherResponse(
     val cod: Int
 )
 
+@Serializable
 data class Coord(
     val lon: Double,
     val lat: Double
 )
 
+@Serializable
 data class Weather(
     val id: Int,
     val main: String,
@@ -29,6 +35,7 @@ data class Weather(
     val icon: String
 )
 
+@Serializable
 data class Main(
     val temp: Double,
     val feels_like: Double,
@@ -36,29 +43,36 @@ data class Main(
     val temp_max: Double,
     val pressure: Int,
     val humidity: Int,
-    val sea_level: Int,
-    val grnd_level: Int
+    val sea_level: Int? = null,
+    val grnd_level: Int? = null
 )
 
+@Serializable
 data class Wind(
     val speed: Double,
     val deg: Int,
-    val gust: Double
+    val gust: Double? = null
 )
 
+@Serializable
 data class Rain(
-    val h1: Double
+    @SerialName("1h")
+    val oneHour: Double? = null,
+    @SerialName("3h")
+    val threeHour: Double? = null
 )
 
+@Serializable
 data class Clouds(
     val all: Int
 )
 
+@Serializable
 data class Sys(
-    val type: Int,
-    val id: Int,
+    val type: Int? = null,
+    val id: Int? = null,
     val country: String,
     val sunrise: Long,
     val sunset: Long
 )
-
+//1712467433
