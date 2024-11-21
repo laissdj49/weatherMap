@@ -1,5 +1,6 @@
 package com.laissdj.weathermap.response
 
+import com.laissdj.weathermap.view.formatTimestampToDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -7,19 +8,28 @@ import kotlinx.serialization.Serializable
 data class WeatherResponse(
     val coord: Coord,
     val weather: List<Weather>,
-    val base: String,
+//    val base: String,
     val main: Main,
     val visibility: Int,
     val wind: Wind,
     val rain: Rain? = null,
-    val clouds: Clouds,
+//    val clouds: Clouds,
     val dt: Long,
     val sys: Sys,
     val timezone: Int,
-    val id: Int,
+//    val id: Int,
     val name: String,
     val cod: Int
-)
+) {
+    fun getFormattedHour(): String = formatTimestampToDateTime(dt, timezone)
+    fun getFormattedSunrise(): String =
+        formatTimestampToDateTime(sys.sunrise, timezone, showDayOfWeek = false)
+
+    fun getFormattedSunset(): String =
+        formatTimestampToDateTime(sys.sunset, timezone, showDayOfWeek = false)
+
+
+}
 
 @Serializable
 data class Coord(
@@ -73,6 +83,5 @@ data class Sys(
     val id: Int? = null,
     val country: String,
     val sunrise: Long,
-    val sunset: Long
+    val sunset: Long,
 )
-//1712467433
