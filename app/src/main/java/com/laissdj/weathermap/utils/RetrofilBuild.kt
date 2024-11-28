@@ -25,7 +25,7 @@ object RetrofitBuild {
         .build()
     val retrofit: Retrofit by lazy {
          Retrofit.Builder()
-            .baseUrl("https://api.openweathermap.org/data/2.5/")
+            .baseUrl("https://api.openweathermap.org/data/3.0/")
              .client(client)
              .addConverterFactory(json.asConverterFactory(contentType))
              .build()

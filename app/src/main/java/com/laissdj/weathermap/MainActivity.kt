@@ -31,8 +31,8 @@ fun GreetingPreview() {
     val weatherInfo = WeatherState.WeatherPresentation(
         isNight = false,
         icon = "https://openweathermap.org/img/wn/02d@2x.png",
-        city = "São Paulo",
-        country = "BR",
+        timezone = "São Paulo",
+        //country = "BR",
         temp = 25,
         skyDescription = "Clear sky",
         sunrise = "06:00",

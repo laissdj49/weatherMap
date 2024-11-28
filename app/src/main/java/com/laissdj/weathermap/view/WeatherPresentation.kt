@@ -18,24 +18,26 @@ fun WeatherResponse.mapToPresentation(
 ): WeatherState.WeatherPresentation {
     return WeatherState.WeatherPresentation(
         skyDescription = weather.first().description,
-        city = name,
-        country = sys.country,
+//        city = name,
+        timezone = timezone,
+        //country = sys.country,
         icon = weather.first().icon,
-        rain = rain?.oneHour,
-        temp = main.temp.roundToInt(),
-        tempMin = main.temp_min.roundToInt(),
-        tempMax = main.temp_max.roundToInt(),
+       // rain = rain?.oneHour,
+        rain = daily.first().rain,
+        temp = daily.first().temp.day.roundToInt(),
+        tempMin = daily.first().temp.min.roundToInt(),
+        tempMax = daily.first().temp.max.roundToInt(),
         sunrise = getFormattedSunrise(),
         sunset = getFormattedSunset(),
         hour = getFormattedHour(),
-        timezone = timezone,
-        isNight = isNight(dt, sys.sunset),
-        pressure = main.pressure,
-        humidity = main.humidity,
-        speed = wind.speed.roundToInt(),
-        visibility = visibility,
-        lat = coord.lat,
-        lon = coord.lon
+        timezoneOffset = timezone_offset,
+        isNight = isNight(daily.first().dt, daily.first().sunset),
+        pressure = daily.first().pressure,
+        humidity = daily.first().humidity,
+        speed = daily.first().wind_speed.roundToInt(),
+        visibility = current.visibility,
+        lat = lat,
+        lon = lon
 
     )
 }
@@ -91,17 +93,18 @@ sealed interface WeatherState {
     data class Error(val error: WeatherError) : WeatherState
 
     data class WeatherPresentation(
-        val city: String = "",
+        //val city: String = "",
+        val timezone: String = "",
         val skyDescription: String = "",
         val icon: String = "",
         val rain: Double? = null,
         val temp: Int = 0,
         val tempMin: Int = 0,
         val tempMax: Int = 0,
-        val country: String = "",
+        //val country: String = "",
         val sunrise: String = "",
         val sunset: String = "",
-        val timezone: Int? = 0,
+        val timezoneOffset: Int? = 0,
         val hour: String = "",
         val isNight: Boolean = false,
         val pressure: Int = 0,
