@@ -123,7 +123,7 @@ fun WeatherInformation(
                 Text(
                     modifier = Modifier.padding(start = 2.dp, top = 4.dp),
                     fontSize = 24.sp,
-                    text = "${weatherInformation.city} - ${weatherInformation.country}",
+                    text = "${weatherInformation.timezone}",
                     style = TextStyle(Color.White),
                 )
             }
